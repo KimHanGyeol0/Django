@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="text-center p-4">
+    <h4>생성된 로또 번호</h4>
+    {% for num in number %}
+      {% if num >= 20 %}
+        <div class="border rounded-circle d-inline fs-3 bg-primary text-white">{{ num }}</div>
+      {% else %}
+        <div class="border rounded-circle d-inline fs-3 bg-danger text-white">{{ num }}</div>
+      {% endif %}
+    {% endfor %}
+    <div class="p-4">
+      <a class="btn btn-primary text-center" onClick="window.location.reload()" style="cursor: pointer;">번호 생성</a>
+    
+    <form action="{% url 'pages:lotto_buy' %}">
+      <div class="fw-bold p-3">몇 회?</div>
+      <input type="text" name="time">
+      <input type="hidden" value="{{ number.0 }}" name="number1">
+      <input type="hidden" value="{{ number.1 }}" name="number2">
+      <input type="hidden" value="{{ number.2 }}" name="number3">
+      <input type="hidden" value="{{ number.3 }}" name="number4">
+      <input type="hidden" value="{{ number.4 }}" name="number5">
+      <input type="hidden" value="{{ number.5 }}" name="number6">
+      <input type="submit" class="btn btn-warning text-center" href="/pages/lotto_buy" value="복권 구매">
+    </form>
+    </div>
+  </div>
+  
+{% endblock  %}

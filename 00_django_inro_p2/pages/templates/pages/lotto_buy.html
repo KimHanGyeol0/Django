@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="text-center">
+    <h1 class="fw-bold">제 {{ time }}회 로또 번호 추천</h1>
+  </div>
+
+  <div class="text-center p-4">
+    <h4>구매한 로또 번호</h4>
+    {% for num in number %}
+      {% if num >= 20 %}
+        <div class="border rounded-circle d-inline fs-3 bg-primary text-white">{{ num }}</div>
+      {% else %}
+        <div class="border rounded-circle d-inline fs-3 bg-danger text-white">{{ num }}</div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="text-center p-4">
+    <h4>제 {{ time }} 로또 번호</h4>
+    {% for num in lotto_numbers %}
+      {% if num >= 20 %}
+        <div class="border rounded-circle d-inline fs-3 bg-primary text-white">{{ num }}</div>
+      {% else %}
+        <div class="border rounded-circle d-inline fs-3 bg-danger text-white">{{ num }}</div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="text-center fw-bold">
+    {% if count == 6 %}
+      <h4>1등</h4>
+    {% elif count == 5 %}
+      <h4>2등</h4>
+    {% elif count == 4 %}
+      <h4>3등</h4>
+    {% elif count == 3 %}
+      <h4>4등</h4>
+    {% else %}
+      <h4>꽝</h4>
+    {% endif %}
+    
+    <h4>맞은 개수 : {{ count }}</h4>
+    <h4>맞은 번호</h4>
+    {% for num in answer %}
+      {% if num >= 20 %}
+        <div class="border rounded-circle d-inline fs-3 bg-primary text-white">{{ num }}</div>
+      {% else %}
+        <div class="border rounded-circle d-inline fs-3 bg-danger text-white">{{ num }}</div>
+      {% endif %}
+    {% endfor %}
+    <a href="/pages/lotto2" class="btn btn-primary m-5">다시하기</a>
+  </div>
+  
+{% endblock %}
