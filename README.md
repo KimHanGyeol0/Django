@@ -37,3 +37,6 @@
   * 외부 API requests
 * 로또
   * 외부 API requests하여 정답 로또 번호와 비교
+* 로또2
+  * 자동 및 수동으로 로또 번호 생성
+  * 외부 API requests하여 원하는 회차의 번호와 비교
