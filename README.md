@@ -9,7 +9,7 @@
 
 * 저녁 메뉴 페이지
 * 메아리 페이지
-  * Query String Parameters으로 전송하고 GET
+  * Query String Parameters, GET
 * hello
   * Variable Routing
 
@@ -20,8 +20,8 @@
 
 * 다시 되돌아가는 Nav
 * id, pw 입력
-  * form으로 input
-  * 입력하면 Query String Parameters으로 전송하고 GET
+  * form input
+  * Query String Parameters, GET
 
 ### 00_django_intro_p2
 
@@ -32,10 +32,8 @@
   * for tag
   * filters
 * 마법의 소라고동
-  * form으로 input
-  * 입력하면 Query String Parameters으로 전송하고 GET
+  * form input
+  * Query String Parameters, GET
   * 외부 API requests
 * 로또
-  * 랜덤 숫자 6개 생성
-  * 외부 API requests하여 정답 로또 번호 생성
-
+  * 외부 API requests하여 정답 로또 번호와 비교
