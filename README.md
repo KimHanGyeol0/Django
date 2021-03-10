@@ -40,3 +40,25 @@
 * 로또2
   * 자동 및 수동으로 로또 번호 생성
   * 외부 API requests하여 원하는 회차의 번호와 비교
+
+## project01
+
+### 01_django_model
+
+* DB 테이블 생성
+* admin site에 등록
+* migrate
+
+### 01_django_model_p1
+
+* DB 테이블 생성
+* admin site에 등록
+* 직접 수정
+* CRUD
+
+## project02
+
+### 02_django_crud
+
+* CRUD
+* 테이블 생성
