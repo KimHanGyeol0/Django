@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  
+  <form action="{% url 'articles:update'  article.pk %}" method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="Input1" class="form-label">Title</label>
+      <input value="{{ article.title }}" name="title" type="text" class="form-control" id="Input1">
+    </div>
+    <div class="mb-3">
+      <label for="Input2" class="form-label">Content</label>
+      <textarea value="{{ article.content }}" name="content" class="form-control" id="Input2" rows="3">{{ article.content}}</textarea>
+      {# input 태그에는 value로 넣고, textarea 태그에는 태그 사이에 넣는다. #}
+    </div>
+    <input type="submit" class="btn btn-primary" value="수정">
+  </form>
+{% endblock  %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>{{ article.title }}</h2>
+  <hr>
+  <p>{{ article.content }}</p>
+  <a href="{% url 'articles:edit' article.pk %}" class="btn btn-primary mt-4">수정</a>
+  <a href="{% url 'articles:delete' article.pk %}" class="btn btn-danger mt-4">삭제</a>
+  <a href="{% url 'articles:index' %}" class="btn btn-secondary mt-4">뒤로가기</a>
+{% endblock  %}

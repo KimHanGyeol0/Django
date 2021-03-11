@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% comment %}
+  GET이 아니라 POST로 사용해봄
+  GET으로 할 때에는 url에 ?key=value&key=value 처럼 query string으로 넘겨줬지만, 그런 것 없이 경로만 생김
+  POST는 새로운 공간(body)에 넣어서 전달 
+  이제 데이터를 주세요는 GET, 데이터를 보내줄테니까 처리해주세요는 POST로 처리하겠다.
+  전송되는 위치와 의미가 다르다~~~ 
+  POST로 하면 사용자가 데이터가 못보게 할 수 있긴하다~~
+  보안 검증용 도장을 찍어서 보내줌(input hidden으로 가려져 있음, 새로고침 할 때마다 바뀜)
+  {% endcomment %}
+  
+  <form action="{% url 'articles:create' %}" method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="Input1" class="form-label">Title</label>
+      <input name="title" type="text" class="form-control" id="Input1" placeholder="제목을 입력해주세요">
+    </div>
+    <div class="mb-3">
+      <label for="Input2" class="form-label">Content</label>
+      <textarea name="content" class="form-control" id="Input2" rows="3" placeholder="내용 입력"></textarea>
+    </div>
+    <input type="submit" class="btn btn-primary" value="글쓰기">
+  </form>
+{% endblock  %}
