@@ -1,0 +1,12 @@
+<h1>detail</h1>
+{{ article.title }}
+<hr>
+{{ article.content }}
+
+<a href="{% url 'articles:update' article.pk %}">update</a>
+
+{# 그냥 a태그로 하면 GET 방식, form으로 만들어서 POST 방식으로 하기#}
+<form action="{% url 'articles:delete' article.pk %}" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="삭제">
+</form>

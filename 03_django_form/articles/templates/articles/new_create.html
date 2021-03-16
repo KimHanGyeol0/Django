@@ -1,0 +1,7 @@
+<h1>new_create</h1>
+{# 받은 모델 폼에 데이터를 적어서 POST 방식으로 다시 new_create에 보냄 #}
+<form action="{% url 'articles:new_create' %}" method="POST">
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit">
+</form>

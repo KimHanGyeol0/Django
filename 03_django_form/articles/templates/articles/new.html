@@ -1,0 +1,31 @@
+<h1>new</h1>
+
+<form action="{% url 'articles:create' %}" method="POST">
+  {% csrf_token %}
+  title : <input name="title" type="text" required>
+  content : <input name="content" type="text">
+  <input type="submit">
+</form>
+
+<hr>
+{# required 속성으로도 기능(입력란을 작성하세요)을 추가할 수 있지만 html에서 구현하면 url f12 창에서 삭제하고 바꿀 수 있음 #}
+{# 따라서 백엔드에서 구현이 더 좋음 #}
+{# 파이썬 코드르 가지고 html 코드를 구현(폼) html 폼과 비교 #}
+{# 장점 : forms.py에서 바로 변경, 추가 가능, 간편 #}
+<form action="{% url 'articles:create' %}" method="POST">
+  {% csrf_token %}
+  <table>
+  {{ form.as_table }}  {# form.as_p() 메서드, 폼을 p태그로 묶어서 보여줌, as_ul, as_table 등  #}
+  </table>
+  <input type="submit">
+</form>
+
+
+{# 모델 폼 #}
+<form action="{% url 'articles:create' %}" method="POST">
+  {% csrf_token %}
+  <table>
+  {{ model_form.as_table }} 
+  </table>
+  <input type="submit">
+</form>
