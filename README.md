@@ -2,7 +2,7 @@
 
 ## Project 00
 
-### 00_django_intro
+### 00_intro
 
 * 기본 페이지
 * 상속
@@ -13,7 +13,7 @@
 * hello
   * Variable Routing
 
-### 00_django_intro_p1
+### 00_intro_p1
 
 * 점심 메뉴 페이지
   * for Tag
@@ -23,7 +23,7 @@
   * form input
   * Query String Parameters, GET
 
-### 00_django_intro_p2
+### 00_intro_p2
 
 * 저녁 메뉴 페이지
   * Variable Routing
@@ -45,13 +45,13 @@
 
 ## project01
 
-### 01_django_model
+### 01_model
 
 * DB 테이블 생성
 * admin site에 등록
 * migrate
 
-### 01_django_model_p1
+### 01_model_p1
 
 * DB 테이블 생성
 * admin site에 등록
@@ -62,13 +62,13 @@
 
 ## project02
 
-### 02_django_crud
+### 02_crud
 
 * CRUD
 * 테이블 생성
 * GET 방식
 
-### 02_django_crud_p1
+### 02_crud_p1
 
 * CRUD 구현
 * redirect
@@ -79,13 +79,17 @@
 
 ## project03
 
-### 03_django_form
+### 03_form
 
 * POST 방식
 * ModelForm
 * Restful
 
-### 04_django_pinterest
+
+
+## project04
+
+### 04_pinterest
 
 * POST
 * ModelForm
@@ -93,3 +97,25 @@
 * STATIC_URL & STATICFILES_DIRS
 * image & file Form
 * MEDIA_URL & MEDIA_ROOT
+* Authentication
+* Authorization
+* 회원 정보
+* built-in Model
+
+
+
+## project05
+
+### 05_auth
+
+* Authentication
+* Authorization
+* Login
+* Logout
+* Signup
+* 탈퇴
+* cookie
+* session
+* 접근 제한
+* built-in Model
+* User Model
