@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+</head>
+<body>
+  <ul>
+    {% if user.is_authenticated %}
+      {# settings.py에서 경로 설정하는 곳 밑에, context_processors에서 자동으로 넣어주는 데이터 몇 가지가 있다. #}
+      {# request와 auth도 들어있어서 가능, 원래 request.user #}
+
+      <li>{{ user }}님, 반갑습니다.</li>
+      <li><a href="{% url 'accounts:logout' %}">LogOut</a></li>
+      <li><a href="{% url 'accounts:profile' user.username %}">Profile</a></li>
+    {% else %}
+      <li><a href="{% url 'accounts:signup' %}">SignUp</a></li>
+      <li><a href="{% url 'accounts:login' %}">LogIn</a></li>
+    {% endif %}
+    
+  </ul>
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }} - {{ message.tags }}</div>
+  {% endfor %}
+  {% block content %}
+  {% endblock  %}
+</body>
+</html>
