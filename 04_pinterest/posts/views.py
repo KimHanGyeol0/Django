@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods, require_POST, require_safe
-from .forms import PostForm
-from .models import Post
+from .forms import PostForm, CommentForm
+from .models import Post, Comment
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
@@ -26,7 +26,9 @@ def create(request):
         # 사진 데이터는 POST가 아닌 FILES에 들어있음
         # 순서에 맞춰서 적을 거 아니면 (data=request.POST, files=request.FILSE)
         if form.is_valid():
-            post = form.save()
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
             return redirect('posts:detail', post.pk)
     else:
         form = PostForm()
@@ -37,9 +39,10 @@ def create(request):
 
 def detail(request, pk):
     post = Post.objects.get(pk=pk)
-
+    comment_form = CommentForm()
     context = {
         'post': post,
+        'comment_form': comment_form,
     }
     return render(request, 'posts/detail.html', context)
 
@@ -59,3 +62,26 @@ def update(request, pk):
         'form': form,
     }
     return render(request, 'posts/form.html', context)
+
+@require_POST
+def comment_create(request, post_pk):
+    comment_form = CommentForm(request.POST)
+    post = Post.objects.get(pk=post_pk)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.post = post
+        comment.user = request.user
+        comment.save()
+        return redirect('posts:detail', post.pk)
+    
+    context = {
+        'comment_form': comment_form,
+    }
+    return render(request, 'posts/detail.html', context)
+
+
+@require_POST
+def comment_delete(request, post_pk, comment_pk):
+    comment = Comment.objects.get(pk=comment_pk)
+    comment.delete()
+    return redirect('posts:detail', post_pk)

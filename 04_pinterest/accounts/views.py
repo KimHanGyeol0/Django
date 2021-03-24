@@ -3,7 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.views.decorators.http import require_POST
-
+from django.contrib.auth import get_user_model
 
 def login(request):
     if request.method == 'POST':
@@ -38,3 +38,11 @@ def signup(request):
         'form': form
     }
     return render(request, 'accounts/form.html', context)
+
+def profile(request, pk):
+    User = get_user_model()
+    user_info = User.objects.get(pk=pk)
+    context = {
+        'user_info': user_info,
+    }
+    return render(request, 'accounts/profile.html', context)

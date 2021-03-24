@@ -12,6 +12,7 @@
             {% csrf_token %}
             <input type="submit" class="nav-link" value="Logout">
           </form>
+          <a href="{% url 'accounts:profile'  user.pk %}">Profile</a>
         {% else %}
           <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
           <a class="nav-link" href="{% url 'accounts:signup' %}">signup</a>
