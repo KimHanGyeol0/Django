@@ -1,0 +1,15 @@
+<div class="card">
+  {# 만약 이미지를 넣어주지 않으면 media 폴더에 있는 lion.png 이미지를 보여줘라#}
+  {% if post.image %}
+    <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.image }}">
+  {% else %}
+    <img src="/media/lion.png" class="card-img-top" alt="">
+  {% endif %}
+  
+  <div class="card-body">
+    <h5 class="card-title">
+      <a href="{% url 'posts:detail' post.pk %}">{{ post.title }}</a>
+    </h5>
+    <p class="card-text">{{ post.content }}</p>
+  </div>
+</div>

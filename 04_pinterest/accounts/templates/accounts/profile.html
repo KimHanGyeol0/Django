@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>{{ user_info.username }}님의 프로필</h1>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for post in user_info.post_set.all %}
+    <div class="col">
+      {% include 'posts/_card.html' %}
+    </div>
+    {% endfor %}
+  </div>
+{% endblock  %}
