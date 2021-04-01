@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
   <h1>{{ user_info.username }}님의 프로필</h1>
+  <hr>
+  {% if user != user_info %}
+    {% if user in user_info.followers.all %}
+      <a href="{% url 'accounts:follow' user_info.pk %}">언팔로우</a>
+    {% else %}
+      <a href="{% url 'accounts:follow' user_info.pk %}">팔로우</a>
+    {% endif %}
+  {% endif %}
+  <p>following : {{ user_info.followings.count }}명</p>
+  <p>follower : {{ user_info.followers.count }}명</p>
+  <hr>
   <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for post in user_info.post_set.all %}
     <div class="col">

@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.views.decorators.http import require_POST
 from django.contrib.auth import get_user_model
+from .forms import CustomUserCreationForm
 
 def login(request):
     if request.method == 'POST':
@@ -28,12 +29,12 @@ def logout(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('accounts:login')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     context = {
         'form': form
     }
@@ -46,3 +47,16 @@ def profile(request, pk):
         'user_info': user_info,
     }
     return render(request, 'accounts/profile.html', context)
+
+def follow(request, pk):
+    User = get_user_model()
+    me = request.user
+    you = get_object_or_404(User, pk=pk)
+    if me != you:
+        # if you in me.followings.all():
+        if me in you.followers.all():
+            # me.followings.remove(you)
+            you.followers.remove(me)
+        else:
+            you.followers.add(me)
+    return redirect('accounts:profile', pk)

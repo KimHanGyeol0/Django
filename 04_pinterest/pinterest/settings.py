@@ -139,3 +139,5 @@ MEDIA_URL = '/media/'
 # MEDIA_URL = '/pinterest/mmm/'
 
 # default = auth.User
+
+AUTH_USER_MODEL = 'accounts.User'

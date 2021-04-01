@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_http_methods, require_POST, require_safe
 from .forms import PostForm, CommentForm
-from .models import Post, Comment
+from .models import Post, Comment, Hashtag
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
@@ -29,6 +29,13 @@ def create(request):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
+            for word in post.content.split():
+                if word.startswith('#'):
+                    # unique=True 때문에 있으면 가져오고, 없으면 생성 get_or_create
+                    # (<Hashtag: Hashtag object (2)>, False) 가 반환
+                    hashtag, created = Hashtag.objects.get_or_create(content=word)
+                    post.hashtags.add(hashtag)
+
             return redirect('posts:detail', post.pk)
     else:
         form = PostForm()
@@ -85,3 +92,25 @@ def comment_delete(request, post_pk, comment_pk):
     comment = Comment.objects.get(pk=comment_pk)
     comment.delete()
     return redirect('posts:detail', post_pk)
+
+def like(request, pk):
+    if request.user.is_authenticated:
+        post = get_object_or_404(Post, pk=pk)
+
+        # 이미 좋아요를 누름
+        if request.user in post.like_users.all():
+            post.like_users.remove(request.user)
+        # 아직 좋아요 안누름
+        else:
+            post.like_users.add(request.user)
+        
+        return redirect('posts:detail', post.pk)
+    return redirect('acconts:login')
+
+def hashtag(request, hashtag_pk):
+    tag = get_object_or_404(Hashtag, pk=hashtag_pk)
+    context = {
+        'tag': tag,
+    }
+
+    return render(request, 'posts/hashtag.html', context)

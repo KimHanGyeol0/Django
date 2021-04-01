@@ -17,7 +17,13 @@
   {% else %}
     <h2>이미지가 없습니다.</h2>
   {% endif %}
-
+  
+  <hr>
+    {% if request.user in post.like_users.all %}
+      <a href="{% url 'posts:like' post.pk %}">❤</a>
+    {% else %}
+      <a href="{% url 'posts:like' post.pk %}">🤍</a>
+    {% endif %}
   <hr>
   <form action="{% url 'posts:comment_create' post.pk %}" method="POST">
     {% csrf_token %}
